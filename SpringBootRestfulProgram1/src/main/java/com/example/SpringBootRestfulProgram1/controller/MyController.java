@@ -13,7 +13,8 @@ import java.util.List;
 public class MyController {
     @Autowired
     private EmpService empService;
-//    @PostMapping("/employee")
+
+    //    @PostMapping("/employee")
 //    public Employee addEmployeeDetails(@RequestBody Employee employee){
 //
 //        return empService.createEmployee(employee);
@@ -48,12 +49,11 @@ public class MyController {
 //        empService.deleteEmployee(id);
 //        return ResponseEntity.noContent().build();
 //    }
-    @GetMapping(value ="/employee", params = "name")
+    @GetMapping(value = "/employee", params = "name")
     public List<Employee> getEmployeesByName(@RequestParam String name) {
 
         return empService.getEmployeesByName(name);
     }
-
 
 
 }
