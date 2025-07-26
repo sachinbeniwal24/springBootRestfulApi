@@ -33,8 +33,8 @@ public class EmpServiceImp implements EmpService {
 
     @Override
     public Employee updateEmployee(int id, Employee newEmployee) {
-       Employee employee = empRepository.findById(id).orElse(null);
-        if(employee != null) {
+        Employee employee = empRepository.findById(id).orElse(null);
+        if (employee != null) {
             return empRepository.save(newEmployee);
         }
         return null;
