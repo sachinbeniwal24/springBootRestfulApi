@@ -1,5 +1,6 @@
 package com.example.SpringBootRestfulProgram1.services;
 
+import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
 import com.example.SpringBootRestfulProgram1.repository.EmpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +50,19 @@ public class EmpServiceImp implements EmpService {
     public List<Employee> getEmployeesByName(String name) {
         return empRepository.findByNameContainingIgnoreCase(name);
     }
+
+    public Employee save(EmployeeDto employeeDto) {
+        Employee employee = new Employee();
+        employee.setName(employeeDto.getName());
+        employee.setEmail(employeeDto.getEmail());
+        employee.setGender(employeeDto.getGender());
+        employee.setDepartment(employeeDto.getDepartment());
+        employee.setCity(employeeDto.getCity());
+        return empRepository.save(employee);
+    }
+
+
+
+
+
 }

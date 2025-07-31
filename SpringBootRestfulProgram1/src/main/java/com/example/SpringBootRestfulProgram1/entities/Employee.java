@@ -3,21 +3,18 @@ package com.example.SpringBootRestfulProgram1.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
-    @Column
+
     private String name;
-    @Column
+
     private String email;
-    @Column
+
     private String gender;
-    @Column
     private String department;
-    @Column
+
     private String city;
 
     public int getId() {
