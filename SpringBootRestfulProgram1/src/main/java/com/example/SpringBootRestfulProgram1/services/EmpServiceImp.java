@@ -1,8 +1,11 @@
 package com.example.SpringBootRestfulProgram1.services;
 
+import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
 import com.example.SpringBootRestfulProgram1.repository.EmpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,42 +14,56 @@ import java.util.Optional;
 @Service
 public class EmpServiceImp implements EmpService {
     @Autowired
-    private EmpRepository empRepository;
+    private EmpRepository employeeRepository;
 
-    @Override
-    public Employee createEmployee(Employee employee) {
-
-        return empRepository.save(employee);
+    public Employee createEmployee(EmployeeDto employee) {
+        return save(employee);
     }
 
     @Override
-    public List<Employee> getAllEmployee() {
-
-        return empRepository.findAll();
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 
     @Override
-    public Optional<Employee> getEmployeeById(int id) {
-
-        return empRepository.findById(id);
+    public List<Employee> getByName(String name) {
+        return employeeRepository.findByNameContainingIgnoreCase(name);
     }
 
     @Override
-    public Employee updateEmployee(int id, Employee newEmployee) {
-        Employee employee = empRepository.findById(id).orElse(null);
-        if (employee != null) {
-            return empRepository.save(newEmployee);
-        }
-        return null;
+    public Optional<Employee> getById(int id) {
+        return employeeRepository.findById(id);
+    }
+
+
+    @Override
+    public Employee updateEmployeeDetails(int id, Employee emp) {
+        return employeeRepository.save(emp);
+
     }
 
     @Override
     public void deleteEmployee(int id) {
-        empRepository.deleteById(id);
+        employeeRepository.deleteById(id);
     }
 
     @Override
-    public List<Employee> getEmployeesByName(String name) {
-        return empRepository.findByNameContainingIgnoreCase(name);
+    public Page<Employee> getAllByPage(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
+
+    public Employee save(EmployeeDto employeeDto) {
+        Employee employee = new Employee();
+        employee.setName(employeeDto.getName());
+        employee.setEmail(employeeDto.getEmail());
+        employee.setGender(employeeDto.getGender());
+        employee.setDepartment(employeeDto.getDepartment());
+        employee.setCity(employeeDto.getCity());
+        return employeeRepository.save(employee);
+    }
+
+
+
+
+
 }

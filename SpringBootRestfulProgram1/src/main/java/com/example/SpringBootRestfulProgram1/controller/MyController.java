@@ -1,59 +1,59 @@
 package com.example.SpringBootRestfulProgram1.controller;
 
+import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
+import com.example.SpringBootRestfulProgram1.response.CustomResponse;
 import com.example.SpringBootRestfulProgram1.services.EmpService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-public class MyController {
+@RequestMapping("/employees")
+public class MyController extends BaseController {
     @Autowired
-    private EmpService empService;
+    private EmpService employeeServices;
 
-        @PostMapping("/employee")
-    public Employee addEmployeeDetails(@RequestBody Employee employee){
-
-        return empService.createEmployee(employee);
+    @PostMapping("/create")
+    public CustomResponse<Employee> createEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
+        return success(employeeServices.createEmployee(employeeDto), "Employee created successfully");
     }
 
-    @GetMapping("/employee")
-    public List<Employee> getAllEmployeeDetails() {
-        return empService.getAllEmployee();
+    @GetMapping("")
+    public  CustomResponse<List<Employee>> getAllEmployee() {
+        return success(employeeServices.getAllEmployees(), "All Employees fetched successfully");
     }
 
-    @GetMapping("/employee/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable int id) {
-        Employee employee= empService.getEmployeeById(id).orElse(null);
-        if(employee!= null) {
-            return ResponseEntity.ok(employee);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-    @PutMapping("/employee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
-        Employee updatedEmployee = empService.updateEmployee(id, employee);
-        if (updatedEmployee != null) {
-            return ResponseEntity.ok(updatedEmployee);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/{id}")
+    public CustomResponse<Optional<Employee>>getById(@PathVariable int id) {
+        return success(employeeServices.getById(id), "Employee fetched by ID successfully");
     }
 
-    @DeleteMapping("/employee/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable int id) {
-        empService.deleteEmployee(id);
-        return ResponseEntity.noContent().build();
-    }
-    @GetMapping(value = "/employee", params = "name")
-    public List<Employee> getEmployeesByName(@RequestParam String name) {
+    @GetMapping("/{name}")
+    public CustomResponse<List<Employee>> getByName(@PathVariable String name) {
+        return success(employeeServices.getByName(name), "Employees fetched by name successfully") ;
 
-        return empService.getEmployeesByName(name);
     }
 
+    @PutMapping("/update/{id}")
+    public CustomResponse<Employee>UpdateEmployeeDetails(@PathVariable int id, @RequestBody Employee emp) {
+        return success(employeeServices.updateEmployeeDetails(id, emp), "Employee updated successfully");
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public CustomResponse<String> deleteEmployee(@PathVariable int id) {
+        employeeServices.deleteEmployee(id);
+        return success( null,"Employee deleted successfully");
+    }
+
+    @GetMapping("/list/page")
+    public CustomResponse<Page<Employee>> getAllByPage(@RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "10") int size) {
+        return success(employeeServices.getAllByPage(PageRequest.of(page, size)), "Employees fetched by page successfully");
+    }
 }
