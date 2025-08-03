@@ -56,7 +56,7 @@ public class MyController {
 
 
     @PutMapping("/employee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@Valid @PathVariable int id, @RequestBody Employee employee) {
         Employee updatedEmployee = empService.updateEmployee(id, employee);
         if (updatedEmployee != null) {
             return ResponseEntity.ok(updatedEmployee);
