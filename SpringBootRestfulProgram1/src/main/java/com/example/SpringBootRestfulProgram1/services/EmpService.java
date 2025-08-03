@@ -1,6 +1,5 @@
 package com.example.SpringBootRestfulProgram1.services;
 
-import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
 
 import java.util.List;
@@ -18,5 +17,4 @@ public interface EmpService {
     public void deleteEmployee(int id);
 
     public List<Employee> getEmployeesByName(String name);
-    Employee save(EmployeeDto employeeDto);
 }
