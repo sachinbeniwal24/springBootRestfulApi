@@ -1,29 +1,18 @@
-package com.example.SpringBootRestfulProgram1.entities;
+package com.example.SpringBootRestfulProgram1.dto;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
-@Entity
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class EmployeeDto {
+    @NotBlank(message = "Name is mandatory")
     private String name;
-
+    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email is mandatory")
     private String email;
-
     private String gender;
+    @Size(min = 2, max = 30, message = "Department must be between 2 and 30 characters")
     private String department;
-
+    @NotNull(message = "City cannot be  null")
     private String city;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

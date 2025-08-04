@@ -1,20 +1,19 @@
 package com.example.SpringBootRestfulProgram1.services;
 
+import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EmpService {
-    public Employee createEmployee(Employee employee);
-
-    public List<Employee> getAllEmployee();
-
-    public Optional<Employee> getEmployeeById(int id);
-
-    public Employee updateEmployee(int id, Employee employee);
-
-    public void deleteEmployee(int id);
-
-    public List<Employee> getEmployeesByName(String name);
+    Employee createEmployee(EmployeeDto employee);
+    List<Employee> getAllEmployees();
+    List<Employee> getByName(String name);
+    Optional<Employee> getById(int id);
+    Employee updateEmployeeDetails(int id, Employee employee);
+    void deleteEmployee(int id);
+    Page<Employee> getAllByPage(Pageable pageable);
 }
