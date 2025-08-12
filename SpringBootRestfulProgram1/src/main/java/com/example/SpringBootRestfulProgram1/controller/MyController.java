@@ -1,11 +1,10 @@
 package com.example.SpringBootRestfulProgram1.controller;
 
-import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
 import com.example.SpringBootRestfulProgram1.response.CustomResponse;
 import com.example.SpringBootRestfulProgram1.services.EmpService;
 
-import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,17 +18,12 @@ public class MyController extends BaseController {
     @Autowired
     private EmpService employeeServices;
 
-    @PostMapping("/create")
-    public CustomResponse<Employee> createEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
-        return success(employeeServices.createEmployee(employeeDto), "Employee created successfully");
-    }
-
     @GetMapping("")
     public  CustomResponse<List<Employee>> getAllEmployee() {
         return success(employeeServices.getAllEmployees(), "All Employees fetched successfully");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public CustomResponse<Optional<Employee>>getById(@PathVariable int id) {
         return success(employeeServices.getById(id), "Employee fetched by ID successfully");
     }

@@ -1,7 +1,9 @@
 package com.example.SpringBootRestfulProgram1.services;
 
 import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
+import com.example.SpringBootRestfulProgram1.entities.Department;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
+import com.example.SpringBootRestfulProgram1.repository.DepartmentRepository;
 import com.example.SpringBootRestfulProgram1.repository.EmpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,13 @@ import java.util.Optional;
 public class EmpServiceImp implements EmpService {
     @Autowired
     private EmpRepository employeeRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    public Employee saveEmployee(EmployeeDto dto) {
+        Employee employee = new Employee();
+        return employeeRepository.save(employee);
+    }
 
     public Employee createEmployee(EmployeeDto employee) {
         return save(employee);

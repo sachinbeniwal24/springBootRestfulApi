@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ManyToMany
+    @JoinColumn(name = "department_id")
+   private Department department;
     private int id;
 
     private String name;

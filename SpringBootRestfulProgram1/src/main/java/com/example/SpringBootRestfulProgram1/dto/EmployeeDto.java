@@ -13,7 +13,8 @@ public class EmployeeDto {
     private String department;
     @NotNull(message = "City cannot be  null")
     private String city;
-
+    @NotNull(message = "Department ID cannot be null")
+    private int departmentId;
     public String getName() {
         return name;
     }
@@ -52,5 +53,12 @@ public class EmployeeDto {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 }
