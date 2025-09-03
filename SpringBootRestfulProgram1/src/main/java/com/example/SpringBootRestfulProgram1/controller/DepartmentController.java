@@ -5,20 +5,21 @@ import com.example.SpringBootRestfulProgram1.entities.Department;
 import com.example.SpringBootRestfulProgram1.response.CustomResponse;
 import com.example.SpringBootRestfulProgram1.services.DepartmentService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import static com.example.SpringBootRestfulProgram1.response.CustomResponse.success;
 
 import java.util.List;
-
-import static jdk.vm.ci.hotspot.HotSpotCompilationRequestResult.success;
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
 
-    @Autowired
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
+
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @PostMapping("/create")
     public CustomResponse<DepartmentDto> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
@@ -27,14 +28,14 @@ public class DepartmentController {
     }
 
     @GetMapping("")
-    public CustomResponse<List<DepartmentDto>> getAllDepartments() {
-        List<DepartmentDto> departments = departmentService.getAllDepartments();
+    public CustomResponse<List<Department>> getAllDepartments() {
+        List<Department> departments = departmentService.getAllDepartments();
         return success(departments, "All Departments fetched successfully");
     }
 
     @GetMapping("/{id}")
-    public CustomResponse<DepartmentDto> getDepartmentById(@PathVariable int id) {
-        DepartmentDto department = departmentService.getDepartmentById(id);
+    public CustomResponse<Optional<Department>> getDepartmentById(@PathVariable int id) {
+        Optional<Department> department = departmentService.getDepartmentById(id);
         return success(department, "Department fetched by ID successfully");
     }
 }

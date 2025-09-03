@@ -1,5 +1,6 @@
 package com.example.SpringBootRestfulProgram1.dto;
 
+import com.example.SpringBootRestfulProgram1.entities.Department;
 import jakarta.validation.constraints.*;
 
 public class EmployeeDto {
@@ -10,7 +11,7 @@ public class EmployeeDto {
     private String email;
     private String gender;
     @Size(min = 2, max = 30, message = "Department must be between 2 and 30 characters")
-    private String department;
+    private Department department;
     @NotNull(message = "City cannot be  null")
     private String city;
     @NotNull(message = "Department ID cannot be null")
@@ -39,11 +40,11 @@ public class EmployeeDto {
         this.gender = gender;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(@Size Department department) {
         this.department = department;
     }
 

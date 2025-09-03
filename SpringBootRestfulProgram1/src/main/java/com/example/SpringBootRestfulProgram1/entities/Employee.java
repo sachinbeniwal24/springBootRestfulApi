@@ -6,9 +6,6 @@ import jakarta.persistence.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToMany
-    @JoinColumn(name = "department_id")
-   private Department department;
     private int id;
 
     private String name;
@@ -16,9 +13,12 @@ public class Employee {
     private String email;
 
     private String gender;
-    private String department;
 
     private String city;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 
     public int getId() {
         return id;
@@ -52,19 +52,19 @@ public class Employee {
         this.gender = gender;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

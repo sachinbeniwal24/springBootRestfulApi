@@ -1,5 +1,6 @@
 package com.example.SpringBootRestfulProgram1.controller;
 
+import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
 import com.example.SpringBootRestfulProgram1.response.CustomResponse;
 import com.example.SpringBootRestfulProgram1.services.EmpService;
@@ -17,6 +18,12 @@ import java.util.Optional;
 public class MyController extends BaseController {
     @Autowired
     private EmpService employeeServices;
+
+
+    @PostMapping("/create")
+    public Employee createEmployee(@RequestBody EmployeeDto employee) {
+        return employeeServices.createEmployee(employee);
+    }
 
     @GetMapping("")
     public  CustomResponse<List<Employee>> getAllEmployee() {
