@@ -18,7 +18,7 @@ import java.util.Optional;
 public class MyController extends BaseController {
     @Autowired
     private EmpService employeeServices;
-// TEST commit
+
     @PostMapping("/create")
     public CustomResponse<Employee> createEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
         return success(employeeServices.createEmployee(employeeDto), "Employee created successfully");
@@ -28,12 +28,12 @@ public class MyController extends BaseController {
     public  CustomResponse<List<Employee>> getAllEmployee() {
         return success(employeeServices.getAllEmployees(), "All Employees fetched successfully");
     }
-// Testing 2 for commit
+
     @GetMapping("/{id}")
     public CustomResponse<Optional<Employee>>getById(@PathVariable int id) {
         return success(employeeServices.getById(id), "Employee fetched by ID successfully");
     }
-// testing 3 for commit
+
     @GetMapping("/{name}")
     public CustomResponse<List<Employee>> getByName(@PathVariable String name) {
         return success(employeeServices.getByName(name), "Employees fetched by name successfully") ;
