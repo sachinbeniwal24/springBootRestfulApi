@@ -24,7 +24,7 @@ public class MyController extends BaseController {
     public Employee createEmployee(@RequestBody EmployeeDto employee) {
         return employeeServices.createEmployee(employee);
     }
-//My name is ,mayank bishnoi
+
 
     @GetMapping("")
     public  CustomResponse<List<Employee>> getAllEmployee() {
