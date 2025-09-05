@@ -6,6 +6,7 @@ import com.example.SpringBootRestfulProgram1.response.CustomResponse;
 import com.example.SpringBootRestfulProgram1.services.EmpService;
 
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,10 +22,9 @@ public class MyController extends BaseController {
 
 
     @PostMapping("/create")
-    public Employee createEmployee(@RequestBody EmployeeDto employee) {
-        return employeeServices.createEmployee(employee);
+    public CustomResponse<Employee> createEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
+        return success(employeeServices.createEmployee(employeeDto), "Employee created successfully");
     }
-
 
     @GetMapping("")
     public  CustomResponse<List<Employee>> getAllEmployee() {
