@@ -2,6 +2,7 @@ package com.example.SpringBootRestfulProgram1.controller;
 
 import com.example.SpringBootRestfulProgram1.dto.CompanyDto;
 import com.example.SpringBootRestfulProgram1.entities.Company;
+import com.example.SpringBootRestfulProgram1.response.CustomResponse;
 import com.example.SpringBootRestfulProgram1.services.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,34 +16,28 @@ import java.util.List;
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
+
     @PostMapping("/create")
-    public ResponseEntity<CompanyDto> createCompany(@RequestBody CompanyDto companyDto) {
+    public CustomResponse<CompanyDto> createCompany(@RequestBody CompanyDto companyDto) {
         CompanyDto createdCompany = companyService.createCompany(companyDto);
-        return ResponseEntity.ok(createdCompany);
+        return new CustomResponse<>(true,  "Company created successfully", createdCompany);
     }
+
     @GetMapping("/companies")
-    public List<Company> getAllCompanyDetails(){
+    public List<Company> getAllCompanyDetails() {
         return companyService.getAllCompanyies();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Company> updateCompany(@Valid @PathVariable int id ,@RequestBody Company company){
-        Company  updateCompany=companyService.updateCompany(id,company);
-        if(updateCompany!=null){
-            return ResponseEntity.ok(updateCompany);
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
+    public CustomResponse <Company>updateCompany(@Valid @PathVariable int id, @RequestBody Company company) {
+        Company updateCompany = companyService.updateCompany(id, company);
+        return new CustomResponse<>(true, "Company updated successfully", updateCompany);
+
 
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCompany(@PathVariable int id ){
-        companyService.deleteCompany(id);
-        return ResponseEntity.noContent().build();
+    public CustomResponse<String> deleteCompany(@PathVariable int id) {companyService.deleteCompany(id);
+        return new CustomResponse<>(true, "Company deleted successfully", null);
     }
-
-
-
-
 }
