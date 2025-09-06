@@ -20,10 +20,7 @@ public class EmpServiceImp implements EmpService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-//    public Employee saveEmployee(EmployeeDto dto) {
-//        Employee employee = new Employee();
-//        return employeeRepository.save(employee);
-//    }
+
 @Override
     public Employee createEmployee(EmployeeDto employee) {
         return save(employee);

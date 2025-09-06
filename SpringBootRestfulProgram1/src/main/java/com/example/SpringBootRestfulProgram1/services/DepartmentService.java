@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DepartmentService {
-    DepartmentDto createdDepartment(DepartmentDto departmentDto);
+    Department createDepartment(DepartmentDto department);
     List<Department> getAllDepartments();
     Optional<Department> getDepartmentById(int id);
 }

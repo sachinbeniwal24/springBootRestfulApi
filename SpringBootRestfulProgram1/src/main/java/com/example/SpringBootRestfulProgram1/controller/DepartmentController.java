@@ -22,9 +22,9 @@ public class DepartmentController {
     }
 
     @PostMapping("/create")
-    public CustomResponse<DepartmentDto> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
-        DepartmentDto createdDepartment = departmentService.createdDepartment(departmentDto);
-        return success(createdDepartment, "Department created successfully");
+    public CustomResponse<Department> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
+        Department createDepartment = departmentService.createDepartment(departmentDto);
+        return success(createDepartment, "Department created successfully");
     }
 
     @GetMapping("")
