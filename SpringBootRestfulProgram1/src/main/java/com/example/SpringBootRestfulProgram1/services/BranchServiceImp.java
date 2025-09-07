@@ -2,7 +2,6 @@ package com.example.SpringBootRestfulProgram1.services;
 
 import com.example.SpringBootRestfulProgram1.dto.BranchDto;
 import com.example.SpringBootRestfulProgram1.entities.Branch;
-import com.example.SpringBootRestfulProgram1.entities.Company;
 import com.example.SpringBootRestfulProgram1.repository.BranchRepository;
 import com.example.SpringBootRestfulProgram1.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BranchServiceImp implements Branchservice{
+public class BranchServiceImp implements BranchService{
     @Autowired
     private BranchRepository branchRepostiory;
     @Autowired
     private CompanyRepository companyRepository;
     @Override
-    public BranchDto createBranch(int companyId, BranchDto branchDto)
-    {
-        Optional<Company> optionalCompany= companyRepository.findById(companyId);
-        if(optionalCompany.isEmpty()){
-            throw new RuntimeException("Company not found with id: " + companyId);
-        }
-        Company company = optionalCompany.get();
-        Branch branch= new Branch();
-        branch.setCity(branchDto.getCity());
-        branch.setCompany(company);
-
-        Branch savedBranch = branchRepostiory.save(branch);
-        BranchDto savedBranchDto = new BranchDto();
-        savedBranchDto.setId(savedBranch.getId());
-        savedBranchDto.setCity(savedBranch.getCity());
-        return savedBranchDto;
-
-
+    public Branch createBranch(int companyId, BranchDto branch) {
+        return save(branch);
     }
 
     @Override
@@ -55,5 +38,10 @@ public class BranchServiceImp implements Branchservice{
     @Override
     public void deleteBranch(int id) {
         branchRepostiory.deleteById(id);
+    }
+    public Branch save(BranchDto branchDto){
+        Branch branch=new Branch();
+        branch.setCity(branch.getCity());
+        return branchRepostiory.save(branch);
     }
 }

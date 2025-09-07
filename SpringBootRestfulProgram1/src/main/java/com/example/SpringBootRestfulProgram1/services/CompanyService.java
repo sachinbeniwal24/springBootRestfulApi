@@ -6,7 +6,7 @@ import com.example.SpringBootRestfulProgram1.entities.Company;
 import java.util.List;
 
 public interface CompanyService {
-    CompanyDto createCompany(CompanyDto companyDto);
+    Company createCompany(CompanyDto company);
 
     List<Company> getAllCompanyies();
 

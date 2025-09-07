@@ -10,34 +10,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/company")
-public class CompanyController {
+public class CompanyController extends BaseController{
     @Autowired
     private CompanyService companyService;
 
     @PostMapping("/create")
-    public CustomResponse<CompanyDto> createCompany(@RequestBody CompanyDto companyDto) {
-        CompanyDto createdCompany = companyService.createCompany(companyDto);
-        return new CustomResponse<>(true,  "Company created successfully", createdCompany);
+    public CustomResponse<Company> createCompany(@RequestBody CompanyDto companyDto) {
+        Company createdCompany = companyService.createCompany(companyDto);
+        return success(companyService.createCompany(companyDto),"Company create successfully");
     }
 
-    @GetMapping("/companies")
-    public List<Company> getAllCompanyDetails() {
-        return companyService.getAllCompanyies();
+    @GetMapping("")
+    public CustomResponse<List<Company>> getAllCompanyDetails() {
+        return success(companyService.getAllCompanyies(),"All Company fetched successfully");
     }
 
     @PutMapping("/{id}")
     public CustomResponse <Company>updateCompany(@Valid @PathVariable int id, @RequestBody Company company) {
-        Company updateCompany = companyService.updateCompany(id, company);
-        return new CustomResponse<>(true, "Company updated successfully", updateCompany);
-
+        return success(companyService.updateCompany(id,company),"Company updated successfully");
 
     }
 
     @DeleteMapping("/{id}")
-    public CustomResponse<String> deleteCompany(@PathVariable int id) {companyService.deleteCompany(id);
-        return new CustomResponse<>(true, "Company deleted successfully", null);
+    public CustomResponse<String> deleteCompany(@PathVariable int id) {
+        companyService.deleteCompany(id);
+     return  success(null,"Company deleted successfully");
     }
 }

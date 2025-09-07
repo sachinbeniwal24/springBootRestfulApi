@@ -13,18 +13,8 @@ public class CompanyServiceImp implements CompanyService{
   private CompanyRepository companyRepository;
 
     @Override
-    public CompanyDto createCompany(CompanyDto companyDto) {
-        Company company = new Company();
-        company.setName(companyDto.getName());
-        company.setEmail(companyDto.getEmail());
-
-        Company savedCompany = companyRepository.save(company);
-        CompanyDto savedCompanyDto = new CompanyDto();
-        savedCompanyDto.setId(savedCompany.getId());
-        savedCompanyDto.setName(savedCompany.getName());
-        savedCompanyDto.setEmail(savedCompany.getEmail());
-
-        return savedCompanyDto;
+    public Company createCompany(CompanyDto company) {
+        return save(company);
     }
 
     @Override
@@ -45,5 +35,11 @@ public class CompanyServiceImp implements CompanyService{
     public void deleteCompany(int id) {
         companyRepository.deleteById(id);
 
+    }
+    public Company save(CompanyDto companydto) {
+        Company company =new Company();
+        company.setName(companydto.getName());
+        company.setEmail(companydto.getEmail());
+        return companyRepository.save(company);
     }
 }
