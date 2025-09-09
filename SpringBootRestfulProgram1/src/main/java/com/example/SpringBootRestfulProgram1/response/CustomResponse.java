@@ -12,6 +12,10 @@ public class CustomResponse<T>{
         this.data = data;
     }
 
+    public CustomResponse() {
+
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -31,7 +35,4 @@ public class CustomResponse<T>{
     public T getData() {
         return data;
     }
-
-    public void setData(T data) {
-        this.data = data;
-    }}
+}

@@ -1,5 +1,6 @@
 package com.example.SpringBootRestfulProgram1.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,15 +8,14 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
-
     private String email;
-
     private String gender;
-    private String department;
-
     private String city;
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    @JsonIgnore
+    private Department department;
 
     public int getId() {
         return id;
@@ -49,19 +49,19 @@ public class Employee {
         this.gender = gender;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

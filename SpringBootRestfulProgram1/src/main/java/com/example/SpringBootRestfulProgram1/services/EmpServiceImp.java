@@ -1,6 +1,7 @@
 package com.example.SpringBootRestfulProgram1.services;
 
 import com.example.SpringBootRestfulProgram1.dto.EmployeeDto;
+import com.example.SpringBootRestfulProgram1.entities.Department;
 import com.example.SpringBootRestfulProgram1.entities.Employee;
 import com.example.SpringBootRestfulProgram1.repository.EmpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class EmpServiceImp implements EmpService {
     @Autowired
     private EmpRepository employeeRepository;
 
+@Override
     public Employee createEmployee(EmployeeDto employee) {
         return save(employee);
     }
@@ -57,13 +59,10 @@ public class EmpServiceImp implements EmpService {
         employee.setName(employeeDto.getName());
         employee.setEmail(employeeDto.getEmail());
         employee.setGender(employeeDto.getGender());
-        employee.setDepartment(employeeDto.getDepartment());
         employee.setCity(employeeDto.getCity());
+        Department department = new Department();
+        department.setId(employeeDto.getdepartmentId());
+        employee.setDepartment(department);
         return employeeRepository.save(employee);
     }
-
-
-
-
-
 }
