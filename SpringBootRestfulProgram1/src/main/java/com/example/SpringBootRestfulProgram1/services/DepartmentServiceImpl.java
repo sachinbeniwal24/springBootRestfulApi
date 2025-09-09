@@ -32,7 +32,6 @@ public Department createDepartment(DepartmentDto department){
     }
     public Department save(DepartmentDto departmentDto){
     Department department= new Department();
-    department.setId(departmentDto.getId());
     department.setName(departmentDto.getName());
     department.setLocation(departmentDto.getLocation());
     return  departmentRepository.save(department);

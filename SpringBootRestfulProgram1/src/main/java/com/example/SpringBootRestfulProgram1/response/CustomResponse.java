@@ -35,15 +35,4 @@ public class CustomResponse<T>{
     public T getData() {
         return data;
     }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-    public static <T> CustomResponse<T> success(T data, String message) {
-        CustomResponse<T> response = new CustomResponse<>();
-        response.setData(data);
-        response.setMessage(message);
-        response.setSuccess(true);
-        return response;
-    }
 }

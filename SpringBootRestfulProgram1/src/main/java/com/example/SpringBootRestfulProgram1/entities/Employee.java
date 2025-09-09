@@ -1,5 +1,6 @@
 package com.example.SpringBootRestfulProgram1.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Employee {
     private String city;
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
+    @JsonIgnore
     private Department department;
 
     public int getId() {

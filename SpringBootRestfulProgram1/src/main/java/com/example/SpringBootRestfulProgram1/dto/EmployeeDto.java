@@ -10,12 +10,10 @@ public class EmployeeDto {
     @NotBlank(message = "Email is mandatory")
     private String email;
     private String gender;
-    @Size(min = 2, max = 30, message = "Department must be between 2 and 30 characters")
-    private Department department;
     @NotNull(message = "City cannot be  null")
     private String city;
-    @NotNull(message = "Department ID cannot be null")
     private int departmentId;
+
     public String getName() {
         return name;
     }
@@ -40,13 +38,6 @@ public class EmployeeDto {
         this.gender = gender;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(@Size Department department) {
-        this.department = department;
-    }
 
     public String getCity() {
         return city;
@@ -56,10 +47,11 @@ public class EmployeeDto {
         this.city = city;
     }
 
-    public int getDepartmentId() {
+    public int getdepartmentId() {
         return departmentId;
     }
-    public void setDepartmentId(int departmentId) {
+
+    public void setdepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
 }
