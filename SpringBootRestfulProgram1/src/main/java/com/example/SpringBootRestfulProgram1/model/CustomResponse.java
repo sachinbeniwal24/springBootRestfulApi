@@ -1,15 +1,12 @@
-package com.example.SpringBootRestfulProgram1.response;
+package com.example.SpringBootRestfulProgram1.model;
 
-public class CustomResponse<T>{
-
+public class CustomResponse {
     private boolean success;
     private String message;
-    private T data;
 
-    public CustomResponse(boolean success, String message, T data) {
+    public CustomResponse(boolean success, String message) {
         this.success = success;
         this.message = message;
-        this.data = data;
     }
 
     public boolean isSuccess() {
@@ -26,13 +23,5 @@ public class CustomResponse<T>{
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 }
