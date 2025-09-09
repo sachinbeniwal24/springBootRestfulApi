@@ -6,7 +6,6 @@ import com.example.SpringBootRestfulProgram1.response.CustomResponse;
 import com.example.SpringBootRestfulProgram1.services.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,13 +17,12 @@ public class CompanyController extends BaseController{
 
     @PostMapping("/create")
     public CustomResponse<Company> createCompany(@RequestBody CompanyDto companyDto) {
-        Company createdCompany = companyService.createCompany(companyDto);
         return success(companyService.createCompany(companyDto),"Company create successfully");
     }
 
     @GetMapping("")
     public CustomResponse<List<Company>> getAllCompanyDetails() {
-        return success(companyService.getAllCompanyies(),"All Company fetched successfully");
+        return success(companyService.getAllCompany(),"All Company fetched successfully");
     }
 
     @PutMapping("/{id}")

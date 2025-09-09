@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table
@@ -17,8 +18,7 @@ public class Company {
      @Email(message = "Email should be valid")
     private  String email;
     @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Branch> branch;
+    private List<Branch> branch = new ArrayList<>();
 
     public int getId() {
         return id;

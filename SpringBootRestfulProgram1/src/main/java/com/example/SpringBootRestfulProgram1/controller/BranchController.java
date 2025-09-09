@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-    @RequestMapping("/branch")
-    public class BranchController extends BaseController {
+   @RequestMapping("/branch")
+       public class BranchController extends BaseController {
         @Autowired
         private BranchService branchService;
 
         @PostMapping("/create")
-        public CustomResponse<Branch> createBranch(@PathVariable int companyId, @RequestBody BranchDto branchDto) {
-            return success(branchService.createBranch(companyId,branchDto),"branch created successfully");
+        public CustomResponse<Branch> createBranch(@Valid @RequestBody BranchDto branchDto) {
+            return success(branchService.createBranch(branchDto),"branch created successfully");
         }
 
         @GetMapping("/branches")
@@ -29,11 +29,11 @@ import java.util.List;
             return success(branchService.updateBranch(id, branch), "Branch updated successfully");
         }
 
-        @DeleteMapping("/{id}")
+        @DeleteMapping("delete/{id}")
         public CustomResponse<String> deleteBranch(@PathVariable int id) {
             branchService.deleteBranch(id);
             return success(null,"branch deleted successfully");
         }
-    }
+   }
 
 

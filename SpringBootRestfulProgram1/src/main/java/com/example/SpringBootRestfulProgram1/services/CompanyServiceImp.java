@@ -18,17 +18,13 @@ public class CompanyServiceImp implements CompanyService{
     }
 
     @Override
-    public List<Company> getAllCompanyies() {
+    public List<Company> getAllCompany() {
         return companyRepository.findAll();
     }
 
     @Override
-    public Company updateCompany(int id, Company newComapny) {
-        Company company = companyRepository.findById(id).orElse(null);
-        if (company != null) {
-            return companyRepository.save(newComapny);
-        }
-          return null;
+    public Company updateCompany(int id, Company company) {
+            return companyRepository.save(company);
     }
 
     @Override

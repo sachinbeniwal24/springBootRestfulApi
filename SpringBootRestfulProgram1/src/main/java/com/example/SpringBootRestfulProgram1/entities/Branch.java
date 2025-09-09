@@ -2,7 +2,7 @@ package com.example.SpringBootRestfulProgram1.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -11,9 +11,11 @@ public class Branch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private  int id ;
-    @NotBlank(message = "City cannot be blank")
+    @NotNull(message = "city cannot be null")
+    @Column
     private  String city;
-    @ManyToOne(fetch=FetchType.EAGER)
+
+    @ManyToOne
     @JoinColumn(name="Company_id")
     @JsonIgnore
     private  Company company;

@@ -2,6 +2,7 @@ package com.example.SpringBootRestfulProgram1.services;
 
 import com.example.SpringBootRestfulProgram1.dto.BranchDto;
 import com.example.SpringBootRestfulProgram1.entities.Branch;
+import com.example.SpringBootRestfulProgram1.entities.Company;
 import com.example.SpringBootRestfulProgram1.repository.BranchRepository;
 import com.example.SpringBootRestfulProgram1.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class BranchServiceImp implements BranchService{
     @Autowired
     private CompanyRepository companyRepository;
     @Override
-    public Branch createBranch(int companyId, BranchDto branch) {
+    public Branch createBranch( BranchDto branch) {
         return save(branch);
     }
 
@@ -28,11 +29,7 @@ public class BranchServiceImp implements BranchService{
 
     @Override
     public Branch updateBranch(int id, Branch newBranch) {
-        Branch branch1=branchRepostiory.findById(id).orElse(null);
-        if(branch1!=null){
-            return branchRepostiory.save(newBranch);
-        }
-        return null;
+        return branchRepostiory.save(newBranch);
     }
 
     @Override
@@ -41,7 +38,10 @@ public class BranchServiceImp implements BranchService{
     }
     public Branch save(BranchDto branchDto){
         Branch branch=new Branch();
-        branch.setCity(branch.getCity());
+        branch.setCity(branchDto.getCity());
+        Company company=new Company();
+        company.setId(branchDto.getCompanyId());
+        branch.setCompany(company);
         return branchRepostiory.save(branch);
     }
 }
